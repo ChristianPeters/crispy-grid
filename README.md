@@ -42,17 +42,23 @@ Pending. Please have a look at the source.
 
 ## Installation
 
-In your Gemfile add
+1. In your Gemfile add:
 
     gem 'crispy-grid'
 
-In your project configuration file (config.rb) add
+2. In your project configuration file (e.g. initializers/compass.rb)
+   add:
 
     require 'crispy-grid'
 
-Then, in your project dir
+3. Customize and import the grid in your application stylesheet:
 
-    compass install crispy-grid
+    // Grid Configuration
+    $grid-column-width: 30px
+    $grid-gutter-width: 10px
+    $grid-columns: 25
+
+    @import crispy-grid
 
 ## License
 
