@@ -16,22 +16,22 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
 // In order to differentiate between left and right padding/border-width you can set $different-right-padding/-border-width.
 // Example: +grid(4, 10px, 15px) will set padding-left: 10px, padding-right: 15px and the element will have the same overall width as +grid(4).
 // By default, the gutter is represented using margin-right, which can also be overridden.
-=column($colspan, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $right-margin: $grid-gutter-width)
+=column($colspan, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: $grid-gutter-width)
   +column-behavior
-  +column-metrics($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $right-margin)
+  +column-metrics($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter)
 
 // The last column should not have a gutter.
-// Respectively, $right-margin defaults to 0 in this mixin.
-=last-column($colspan, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $right-margin: 0)
-  +column($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $right-margin)
+// Respectively, $gutter defaults to 0 in this mixin.
+=last-column($colspan, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: 0)
+  +column($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter)
 
 // The only difference between the last and other columns is that the last column has margin-right set to 0.
 =last
   margin-right: 0
 
 // A row spans the whole grid width, i.e. it is the only column in a row. This is just a more elegant way for writing +last-column($grid-columns).
-=row($colspan: $grid-columns, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $right-margin: 0)
-  +last-column($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $right-margin)
+=row($colspan: $grid-columns, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: 0)
+  +last-column($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter)
 
 // Use this mixin for your (none-floating) grid container.
 // By default, it spans the whole grid-width and is centered.
@@ -49,7 +49,7 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
   // This is only for preventing IE6's double margin bug
   display: inline
 
-=column-metrics($column-width, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $right-margin: $grid-gutter-width, $container: false)
+=column-metrics($column-width, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: $grid-gutter-width, $container: false)
   // Convert column counts to widths with unit
   $column-width: colspan-to-width($column-width)
   @if is_column_count($padding)
@@ -57,7 +57,7 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
   $differing-right-padding: colspan-to-width($differing-right-padding)
   $border-width: colspan-to-width($border-width)
   $differing-right-border-width: colspan-to-width($differing-right-border-width)
-  $right-margin: colspan-to-width($right-margin)
+  $gutter: colspan-to-width($gutter)
 
   // Setting width
   @if $container
@@ -76,7 +76,7 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
   border:
     left-width: $border-width
     right-width: right-value($border-width, $differing-right-border-width)
-  margin-right: $right-margin
+  margin-right: $gutter
 
 @function is_column_count($colspan)
   @if type_of($colspan) == 'number'
