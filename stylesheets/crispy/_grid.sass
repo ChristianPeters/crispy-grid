@@ -16,22 +16,22 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
 // In order to differentiate between left and right padding/border-width you can set $different-right-padding/-border-width.
 // Example: +grid(4, 10px, 15px) will set padding-left: 10px, padding-right: 15px and the element will have the same overall width as +grid(4).
 // By default, the gutter is represented using margin-right, which can also be overridden.
-=column($colspan, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: $grid-gutter-width)
+=column($colspan, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: $grid-gutter-width, $subtract-border-from: false)
   +column-behavior
-  +column-metrics($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter)
+  +column-metrics($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter, $subtract-border-from: $subtract-border-from)
 
 // The last column should not have a gutter.
 // Respectively, $gutter defaults to 0 in this mixin.
-=last-column($colspan, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: 0)
-  +column($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter)
+=last-column($colspan, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: 0, $subtract-border-from: false)
+  +column($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter, $subtract-border-from)
 
 // The only difference between the last and other columns is that the last column has margin-right set to 0.
 =last
   margin-right: 0
 
 // A row spans the whole grid width, i.e. it is the only column in a row. This is just a more elegant way for writing +last-column($grid-columns).
-=row($colspan: $grid-columns, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: 0)
-  +last-column($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter)
+=row($colspan: $grid-columns, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: 0, $subtract-border-from: false)
+  +last-column($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter, $subtract-border-from)
 
 // Use this mixin for your (none-floating) grid container.
 // By default, it spans the whole grid-width and is centered.
@@ -49,7 +49,7 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
   // This is only for preventing IE6's double margin bug
   display: inline
 
-=column-metrics($column-width, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: $grid-gutter-width, $container: false)
+=column-metrics($column-width, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: $grid-gutter-width, $container: false, $subtract-border-from: false)
   // Convert column counts to widths with unit
   $column-width: colspan-to-width($column-width)
   $padding: colspan-to-width($padding, $include-last-gutter: true)
@@ -60,24 +60,33 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
     // It is assumed that the original gutter should also be preserved in addition to the one of the last column
     $gutter: $grid-gutter-width + colspan-to-width($gutter, $include-last-gutter: true)
 
+  // Calculate derived metrics
+  $right-border-width: right-value($border-width, $differing-right-border-width)
+  $border-width-sum: left-and-right-sum($border-width, $differing-right-border-width)
+  $left-padding: if($subtract-border-from == 'padding' or $subtract-border-from == 'left-padding', $padding - $border-width, $padding)
+  $right-padding: right-value($padding, $differing-right-padding)
+  $right-padding: if($subtract-border-from == 'padding' or $subtract-border-from == 'right-padding', $right-padding - $right-border-width, $right-padding)
+  $padding-sum: left-and-right-sum($left-padding, $right-padding)
+
   // Setting width
   @if $container
     // Paddings and borders do not affect the inner width of a container.
     width: $column-width
   @else
-    $padding-sum: left-and-right-sum($padding, $differing-right-padding)
-    $border-width-sum: left-and-right-sum($border-width, $differing-right-border-width)
     // Paddings and borders do not affect the outer width of a column.
     width: $column-width - $padding-sum - $border-width-sum
 
   // Setting other box attributes
   padding:
-    left: $padding
-    right: right-value($padding, $differing-right-padding)
+    left: $left-padding
+    right: $right-padding
   border:
     left-width: $border-width
-    right-width: right-value($border-width, $differing-right-border-width)
-  margin-right: $gutter
+    right-width: $right-border-width
+  @if type_of($gutter) == number
+    margin-right: if($subtract-border-from == 'gutter' and $gutter > 0, $gutter - $border-width-sum, $gutter)
+  @else if $gutter
+    margin-right: $gutter
 
 @function is_column_count($colspan)
   @if type_of($colspan) == 'number'
@@ -102,8 +111,9 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
   @if type-of($differing-right-value) == number
     @if comparable($value, $differing-right-value)
       @return $value + $differing-right-value
-  @else
-    @return $value * 2
+    @else
+      @warn "It is not possible to compute the sum of #{$value} and #{$differing-right-value}. Please make them comparable. Meanwhile, the result is set to #{$value * 2}."
+  @return $value * 2
 
 // returns value unless numeric differing-right-value is given
 @function right-value($value, $differing-right-value: false)
