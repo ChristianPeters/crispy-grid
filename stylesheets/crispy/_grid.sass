@@ -52,12 +52,13 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
 =column-metrics($column-width, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: $grid-gutter-width, $container: false)
   // Convert column counts to widths with unit
   $column-width: colspan-to-width($column-width)
-  @if is_column_count($padding)
-    $padding: column-count-to-width($padding) + $grid-gutter-width
-  $differing-right-padding: colspan-to-width($differing-right-padding)
-  $border-width: colspan-to-width($border-width)
-  $differing-right-border-width: colspan-to-width($differing-right-border-width)
-  $gutter: colspan-to-width($gutter)
+  $padding: colspan-to-width($padding, $include-last-gutter: true)
+  $differing-right-padding: colspan-to-width($differing-right-padding, $include-last-gutter: true)
+  $border-width: colspan-to-width($border-width, $include-last-gutter: true)
+  $differing-right-border-width: colspan-to-width($differing-right-border-width, $include-last-gutter: true)
+  @if is_column_count($gutter)
+    // It is assumed that the original gutter should also be preserved in addition to the one of the last column
+    $gutter: $grid-gutter-width + colspan-to-width($gutter, $include-last-gutter: true)
 
   // Setting width
   @if $container
@@ -84,14 +85,17 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
       @return true
   @return false
 
-@function colspan-to-width($colspan)
+@function colspan-to-width($colspan, $include-last-gutter: false)
   @if is_column_count($colspan)
-    @return column-count-to-width($colspan)
+    @return column-count-to-width($colspan, $include-last-gutter)
   @else
     @return $colspan
 
-@function column-count-to-width($column-count)
-  @return $grid-column-width * $column-count + $grid-gutter-width * ($column-count - 1)
+@function column-count-to-width($column-count, $include-last-gutter: false)
+  @if $include-last-gutter
+    @return ($grid-column-width + $grid-gutter-width) * $column-count
+  @else
+    @return $grid-column-width * $column-count + $grid-gutter-width * ($column-count - 1)
 
 // adds to comparable values or doubles the first one
 @function left-and-right-sum($value, $differing-right-value)
