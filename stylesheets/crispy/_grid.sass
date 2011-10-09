@@ -29,10 +29,14 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
 =last
   margin-right: 0
 
+// A row spans the whole grid width, i.e. it is the only column in a row. This is just a more elegant way for writing +last-column($grid-columns).
+=row($colspan: $grid-columns, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $right-margin: 0)
+  +last-column($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $right-margin)
+
 // Use this mixin for your (none-floating) grid container.
 // By default, it spans the whole grid-width and is centered.
 // Unlike with columns, paddings and borders of a container do not affect its inner width
-=grid-container($colspan: $grid-width, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $left-margin: auto, $right-margin: auto)
+=grid-container($colspan: $grid-columns, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $left-margin: auto, $right-margin: auto)
   +column-metrics($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $right-margin, true)
   margin-left: $left-margin
   // As this grid system bases on the Float (Nearly) Everything method, this is necessary to enforce the container to enclose its content.
