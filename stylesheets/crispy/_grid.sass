@@ -42,35 +42,32 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
   // As this grid system bases on the Float (Nearly) Everything method, this is necessary to enforce the container to enclose its content.
   overflow: hidden
 
-// Core Grid Methods
-//------------------
+// Internal Methods
+//=================
 =column-behavior
   float: left
   // This is only for preventing IE6's double margin bug
   display: inline
 
-=column-metrics($colspan, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $right-margin: $grid-gutter-width, $container: false)
-  @if unitless($colspan)
-    // $colspan is the number of grid columns (default)
-    $inner-box-width: $grid-column-width * $colspan + $grid-gutter-width * ($colspan - 1)
-    +set-column-metrics($inner-box-width, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $right-margin, $container)
-  @else
-    // $colspan is a fixed width (circumvents grid)
-    +set-column-metrics($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $right-margin, $container)
-
-// Private Methods
-//================
-=set-column-metrics($inner-box-width: $grid-column-width, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $right-margin: 0, $container: false)
+=column-metrics($column-width, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $right-margin: $grid-gutter-width, $container: false)
+  // Convert column counts to widths with unit
+  $column-width: colspan-to-width($column-width)
+  @if is_column_count($padding)
+    $padding: column-count-to-width($padding) + $grid-gutter-width
+  $differing-right-padding: colspan-to-width($differing-right-padding)
+  $border-width: colspan-to-width($border-width)
+  $differing-right-border-width: colspan-to-width($differing-right-border-width)
+  $right-margin: colspan-to-width($right-margin)
 
   // Setting width
   @if $container
     // Paddings and borders do not affect the inner width of a container.
-    width: $inner-box-width
+    width: $column-width
   @else
     $padding-sum: left-and-right-sum($padding, $differing-right-padding)
     $border-width-sum: left-and-right-sum($border-width, $differing-right-border-width)
     // Paddings and borders do not affect the outer width of a column.
-    width: $inner-box-width - $padding-sum - $border-width-sum
+    width: $column-width - $padding-sum - $border-width-sum
 
   // Setting other box attributes
   padding:
@@ -80,6 +77,21 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
     left-width: $border-width
     right-width: right-value($border-width, $differing-right-border-width)
   margin-right: $right-margin
+
+@function is_column_count($colspan)
+  @if type_of($colspan) == 'number'
+    @if unitless($colspan) and $colspan > 0
+      @return true
+  @return false
+
+@function colspan-to-width($colspan)
+  @if is_column_count($colspan)
+    @return column-count-to-width($colspan)
+  @else
+    @return $colspan
+
+@function column-count-to-width($column-count)
+  @return $grid-column-width * $column-count + $grid-gutter-width * ($column-count - 1)
 
 // adds to comparable values or doubles the first one
 @function left-and-right-sum($value, $differing-right-value)
