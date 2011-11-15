@@ -84,7 +84,7 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
     left-width: $border-width
     right-width: $right-border-width
   @if type_of($left-gutter) == number
-    margin-left: if(($subtract-border-from == 'gutter' or $subtract-border-from == 'left-gutter') and $left-gutter > 0, $gutter - $border-width, $gutter)
+    margin-left: if(($subtract-border-from == 'gutter' or $subtract-border-from == 'left-gutter') and $left-gutter > 0, $gutter - $border-width, $left-gutter)
   @else
     margin-left: $left-gutter
   @if type_of($gutter) == number
