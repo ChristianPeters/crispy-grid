@@ -85,11 +85,11 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
     right-width: $right-border-width
   @if type_of($left-gutter) == number
     margin-left: if(($subtract-border-from == 'gutter' or $subtract-border-from == 'left-gutter') and $left-gutter > 0, $gutter - $border-width, $gutter)
-  @else
+  @else if $left-gutter
     margin-left: $left-gutter
   @if type_of($gutter) == number
     margin-right: if(($subtract-border-from == 'gutter' or $subtract-border-from == 'right-gutter') and $gutter > 0, $gutter - $right-border-width, $gutter)
-  @else
+  @else if $gutter
     margin-right: $gutter
 
 @function colspan-to-width($colspan, $include-last-gutter: false)
