@@ -57,8 +57,7 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
     // It is assumed that the original gutter should also be preserved in addition to the one of the last column
     $gutter: $grid-gutter-width + colspan-to-width($gutter, $include-last-gutter: true)
   @if is_column_count($left-gutter)
-    // It is assumed that the original gutter should also be preserved in addition to the one of the last column
-    $left-gutter: $grid-gutter-width + colspan-to-width($left-gutter, $include-last-gutter: true)
+    $left-gutter: colspan-to-width($left-gutter, $include-last-gutter: true)
 
   // Calculate derived metrics
   $right-border-width: right-value($border-width, $differing-right-border-width)
@@ -84,7 +83,7 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
     left-width: $border-width
     right-width: $right-border-width
   @if type_of($left-gutter) == number
-    margin-left: if(($subtract-border-from == 'gutter' or $subtract-border-from == 'left-gutter') and $left-gutter > 0, $gutter - $border-width, $gutter)
+    margin-left: if(($subtract-border-from == 'gutter' or $subtract-border-from == 'left-gutter') and $left-gutter > 0, $gutter - $border-width, $left-gutter)
   @else if $left-gutter
     margin-left: $left-gutter
   @if type_of($gutter) == number
