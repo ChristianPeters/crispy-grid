@@ -1,3 +1,5 @@
+@import compass//utilities/general/clearfix
+
 // Derived Variables
 //==================
 // Note that the gutter is only between the columns, i.e. you have 1 gutter less than columns
@@ -35,11 +37,15 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
 
 // Use this mixin for your (none-floating) grid container.
 // By default, it spans the whole grid-width and is centered.
-// Unlike with columns, paddings and borders of a container do not affect its inner width
-=grid-container($colspan: $grid-columns, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $left-margin: auto, $right-margin: auto)
+// Unlike with columns, paddings and borders of a container do not affect its inner width.
+// Clearfixing has to be done in order to enforce the container to enclose its content.
+// By default, the overflow: hidden method is used. Specify $clearfix: pie if container contents should be visible outside of the container (e.g. when positioned absolutely).
+=grid-container($colspan: $grid-columns, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $left-margin: auto, $right-margin: auto, $clearfix: overflow)
   +column-metrics($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $right-margin, $left-margin, true)
-  // As this grid system bases on the Float (Nearly) Everything method, this is necessary to enforce the container to enclose its content.
-  overflow: hidden
+  @if $clearfix == pie or $clearfix == pie-clearfix
+    +pie-clearfix
+  @else
+    +clearfix
 
 // Internal Methods
 //=================

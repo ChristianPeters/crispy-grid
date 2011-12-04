@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   # Release Specific Information
-  s.version = "0.1.3"
-  s.date = "2011-11-16"
+  s.version = "0.2.0"
+  s.date = "2011-12-04"
 
   # Gem Details
   s.name = "crispy-grid"
