@@ -1,5 +1,13 @@
 # Crispy Grid Changelog
 
+## 0.3.0
+
+### Breaking Change:
+
+* Added support for device-specific grid configurations for responsive designs
+  * You have to update your grid configuration as specified in the readme.
+  * Also, the first parameter of the mixins `+row` and `+grid-container` have been changed. Thus, you should use e.g. `+row($colspan: 16)` instead of `+row(16)`.
+
 ## 0.2.0
 
 * Added option for using pie-clearfix on grid containers

@@ -1,11 +1,27 @@
 @import compass//utilities/general/clearfix
 
-// Derived Variables
-//==================
+// Grid Configuration Accessors
+//=============================
+@function default-device()
+  @return nth($devices, 1)
+
+@function grid-column-width($device: default-device())
+  @return nth($grid-column-widths, index($devices, $device))
+
+@function grid-gutter-width($device: default-device())
+  @return nth($grid-gutter-widths, index($devices, $device))
+
+@function grid-columns($device: default-device())
+  @return nth($grid-columns, index($devices, $device))
+
 // Note that the gutter is only between the columns, i.e. you have 1 gutter less than columns
-$grid-gutters: $grid-columns - 1
-// These default settings result in a grid-width of 990 px
-$grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gutters
+@function grid-gutters($device: default-device())
+  @return grid-columns($device) - 1
+
+// The default settings result in a grid-width of 990 px
+@function grid-width($device: default-device())
+  @return grid-column-width($device) * grid-columns($device) + grid-gutter-width($device) * grid-gutters($device)
+
 
 // Public Methods
 //===============
@@ -18,30 +34,30 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
 // In order to differentiate between left and right padding/border-width you can set $different-right-padding/-border-width.
 // Example: +grid(4, 10px, 15px) will set padding-left: 10px, padding-right: 15px and the element will have the same overall width as +grid(4).
 // By default, the gutter is represented using margin-right, which can also be overridden.
-=column($colspan, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: $grid-gutter-width, $left-gutter: false, $subtract-border-from: false)
+=column($colspan, $device: default-device(), $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: grid-gutter-width($device), $left-gutter: false, $subtract-border-from: false)
   +column-behavior
-  +column-metrics($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter, $left-gutter, $subtract-border-from: $subtract-border-from)
+  +column-metrics($colspan, $device, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter, $left-gutter, $subtract-border-from: $subtract-border-from)
 
 // The last column should not have a gutter.
 // Respectively, $gutter defaults to 0 in this mixin.
-=last-column($colspan, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: 0, $left-gutter: false, $subtract-border-from: false)
-  +column($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter, $left-gutter, $subtract-border-from)
+=last-column($colspan, $device: default-device(), $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: 0, $left-gutter: false, $subtract-border-from: false)
+  +column($colspan, $device, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter, $left-gutter, $subtract-border-from)
 
 // The only difference between the last and other columns is that the last column has margin-right set to 0.
 =last
   margin-right: 0
 
 // A row spans the whole grid width, i.e. it is the only column in a row. This is just a more elegant way for writing +last-column($grid-columns).
-=row($colspan: $grid-columns, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: 0, $left-gutter: false, $subtract-border-from: false)
-  +last-column($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter, $left-gutter, $subtract-border-from)
+=row($device: default-device(), $colspan: grid-columns($device), $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: 0, $left-gutter: false, $subtract-border-from: false)
+  +last-column($colspan, $device, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter, $left-gutter, $subtract-border-from)
 
 // Use this mixin for your (none-floating) grid container.
 // By default, it spans the whole grid-width and is centered.
 // Unlike with columns, paddings and borders of a container do not affect its inner width.
 // Clearfixing has to be done in order to enforce the container to enclose its content.
 // By default, the overflow: hidden method is used. Specify $clearfix: pie if container contents should be visible outside of the container (e.g. when positioned absolutely).
-=grid-container($colspan: $grid-columns, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $left-margin: auto, $right-margin: auto, $clearfix: overflow)
-  +column-metrics($colspan, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $right-margin, $left-margin, true)
+=grid-container($device: default-device(), $colspan: grid-columns($device), $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $left-margin: auto, $right-margin: auto, $clearfix: overflow)
+  +column-metrics($colspan, $device, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $right-margin, $left-margin, true)
   @if $clearfix == pie or $clearfix == pie-clearfix
     +pie-clearfix
   @else
@@ -52,18 +68,18 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
 =column-behavior
   float: left
 
-=column-metrics($column-width, $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: $grid-gutter-width, $left-gutter: false, $container: false, $subtract-border-from: false)
+=column-metrics($column-width, $device: default-device(), $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: grid-gutter-width($device), $left-gutter: false, $container: false, $subtract-border-from: false)
   // Convert column counts to widths with unit
-  $column-width: colspan-to-width($column-width)
-  $padding: colspan-to-width($padding, $include-last-gutter: true)
-  $differing-right-padding: colspan-to-width($differing-right-padding, $include-last-gutter: true)
-  $border-width: colspan-to-width($border-width, $include-last-gutter: true)
-  $differing-right-border-width: colspan-to-width($differing-right-border-width, $include-last-gutter: true)
+  $column-width: colspan-to-width($column-width, $device)
+  $padding: colspan-to-width($padding, $device, $include-last-gutter: true)
+  $differing-right-padding: colspan-to-width($differing-right-padding, $device, $include-last-gutter: true)
+  $border-width: colspan-to-width($border-width, $device, $include-last-gutter: true)
+  $differing-right-border-width: colspan-to-width($differing-right-border-width, $device, $include-last-gutter: true)
   @if is-column-count($gutter)
     // It is assumed that the original gutter should also be preserved in addition to the one of the last column
-    $gutter: $grid-gutter-width + colspan-to-width($gutter, $include-last-gutter: true)
+    $gutter: grid-gutter-width($device) + colspan-to-width($gutter, $device, $include-last-gutter: true)
   @if is-column-count($left-gutter)
-    $left-gutter: colspan-to-width($left-gutter, $include-last-gutter: true)
+    $left-gutter: colspan-to-width($left-gutter, $device, $include-last-gutter: true)
 
   // Calculate derived metrics
   $right-border-width: right-value($border-width, $differing-right-border-width)
@@ -97,9 +113,9 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
   @else if $gutter
     margin-right: $gutter
 
-@function colspan-to-width($colspan, $include-last-gutter: false)
+@function colspan-to-width($colspan, $device: default-device(), $include-last-gutter: false)
   @if is-column-count($colspan)
-    @return column-count-to-width($colspan, $include-last-gutter)
+    @return column-count-to-width($colspan, $device, $include-last-gutter)
   @else
     @return $colspan
 
@@ -109,11 +125,11 @@ $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gut
       @return true
   @return false
 
-@function column-count-to-width($column-count, $include-last-gutter: false)
+@function column-count-to-width($column-count, $device: default-device(), $include-last-gutter: false)
   @if $include-last-gutter
-    @return ($grid-column-width + $grid-gutter-width) * $column-count
+    @return (grid-column-width($device) + grid-gutter-width($device)) * $column-count
   @else
-    @return $grid-column-width * $column-count + $grid-gutter-width * ($column-count - 1)
+    @return grid-column-width($device) * $column-count + grid-gutter-width($device) * ($column-count - 1)
 
 // adds to comparable values or doubles the first one
 @function left-and-right-sum($value, $differing-right-value)

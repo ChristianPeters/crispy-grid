@@ -53,12 +53,37 @@ Pending. Please have a look at the source.
 
 3. Customize and import the grid in your application stylesheet:
 
-    // Grid Configuration
-    $grid-column-width: 30px
-    $grid-gutter-width: 10px
+### Configuration for a Single Device
+
+The grid configuration is layed out for multiple devices.
+Though, you can also use Crispy Grid the classic way without any overhead.
+Just provide one setting and ignore the fact that the variables are
+written in plural.
+
+    // Copy this into your app in order to customize the grid
+    $devices: desktop
+    $grid-column-widths: 30px
+    $grid-gutter-widths: 10px
     $grid-columns: 25
 
-    @import crispy-grid
+    // Import Crispy Grid below the configuration
+    @import crispy/grid
+
+### Configuration for Multiple Devices
+
+In `$devices` you can list all devices you whish to respond to.
+The nth entry of any of the following lists belongs to the nth device (the order of `$devices` matters).
+The first device is the default for all grid helpers.
+Consider to set mobile as default device when following the mobile-first design approach.
+
+    // Copy this into your app in order to customize the grid
+    $devices: desktop, tablet, handheld-640, handheld-320
+    $grid-column-widths: 30px, 30px, 20px, 20px
+    $grid-gutter-widths: 10px, 10px, 5px, 5px
+    $grid-columns: 30, 25, 25, 13
+
+    // Import Crispy Grid below the configuration
+    @import crispy/grid
 
 ## License
 

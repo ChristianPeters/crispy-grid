@@ -2,17 +2,16 @@
 //==========================
 // Copy this into your app in order to customize the grid
 
-// Grid Configuration
-$grid-column-width: 30px
-$grid-gutter-width: 10px
-$grid-columns: 25
-
-// Note that that there is always one gutter between two columns
-// $grid-gutters: $grid-columns - 1
-
-// The grid width is calculated from the values above
-// $grid-width: $grid-column-width * $grid-columns + $grid-gutter-width * $grid-gutters
-// For the default values, that is 30px * 25 + 10px * 24 = 990px
+// Configure grid for every device you whish to respond to
+// The nth entry of any list belongs to the nth device (the order of $devices matters).
+// The lists can take any number of devices, including 1.
+// If you do not plan to support multiple devices, you may want to delete all but the first entries.
+// The first device is the default for all grid helpers.
+// Consider to set mobile as default device when following the mobile-first design approach.
+$devices: desktop, tablet, handheld-640, handheld-320 !default
+$grid-column-widths: 30px, 30px, 20px, 20px !default
+$grid-gutter-widths: 10px, 10px, 5px, 5px !default
+$grid-columns: 30, 25, 25, 13 !default
 
 // This import statement has to be included in your application stylesheet
-@import crispy-grid
+@import crispy/grid
