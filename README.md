@@ -60,14 +60,16 @@ Though, you can also use Crispy Grid the classic way without any overhead.
 Just provide one setting and ignore the fact that the variables are
 written in plural.
 
-    // Copy this into your app in order to customize the grid
-    $devices: desktop
-    $grid-column-widths: 30px
-    $grid-gutter-widths: 10px
-    $grid-columns: 25
+``` sass
+// Copy this into your app in order to customize the grid
+$devices: desktop
+$grid-column-widths: 30px
+$grid-gutter-widths: 10px
+$grid-columns: 25
 
-    // Import Crispy Grid below the configuration
-    @import crispy/grid
+// Import Crispy Grid below the configuration
+@import crispy/grid
+```
 
 ### Configuration for Multiple Devices
 
@@ -76,21 +78,21 @@ The nth entry of any of the following lists belongs to the nth device (the order
 The first device is the default for all grid helpers.
 Consider to set mobile as default device when following the mobile-first design approach.
 
-    // Copy this into your app in order to customize the grid
-    $devices: desktop, tablet, handheld-640, handheld-320
-    $grid-column-widths: 30px, 30px, 20px, 20px
-    $grid-gutter-widths: 10px, 10px, 5px, 5px
-    $grid-columns: 30, 25, 25, 13
+``` sass
+// Copy this into your app in order to customize the grid
+$devices: desktop, tablet, handheld-640, handheld-320
+$grid-column-widths: 30px, 30px, 20px, 20px
+$grid-gutter-widths: 10px, 10px, 5px, 5px
+$grid-columns: 30, 25, 25, 13
 
-    // Import Crispy Grid below the configuration
-    @import crispy/grid
+// Import Crispy Grid below the configuration
+@import crispy/grid
+```
+
+## Changelog
+
+There is one. [Have a look at it](https://github.com/ChristianPeters/crispy-grid/blob/master/CHANGELOG.md).
 
 ## License
 
 See MIT-LICENSE.
-
-## TODO
-
-- Make use of @extend in order to reduce CSS output
-- Return calculation of inner box width for further use as column width
-  of children
