@@ -1,5 +1,9 @@
 # Crispy Grid Changelog
 
+## 0.3.1
+
+* Altered configuration for a single device due to the change in Sass, that lists have to contain multiple elements
+
 ## 0.3.0
 
 ### Breaking Change:

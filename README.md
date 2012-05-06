@@ -55,16 +55,14 @@ Pending. Please have a look at the source.
 
 ### Configuration for a Single Device
 
-The grid configuration is layed out for multiple devices.
-Though, you can also use Crispy Grid the classic way without any overhead.
-Just provide one setting and ignore the fact that the variables are
-written in plural.
+Tell Crispy Grid to use a single device by setting the singular
+configuration options `$device`, `$grid-column-width`, and `grid-gutter-width`.
 
     // Copy this into your app in order to customize the grid
-    $devices: desktop
-    $grid-column-widths: 30px
-    $grid-gutter-widths: 10px
-    $grid-columns: 25
+    $device: desktop
+    $grid-column-width: 30px
+    $grid-gutter-width: 10px
+    $grid-columns: 24
 
     // Import Crispy Grid below the configuration
     @import crispy/grid
@@ -80,7 +78,7 @@ Consider to set mobile as default device when following the mobile-first design 
     $devices: desktop, tablet, handheld-640, handheld-320
     $grid-column-widths: 30px, 30px, 20px, 20px
     $grid-gutter-widths: 10px, 10px, 5px, 5px
-    $grid-columns: 30, 25, 25, 13
+    $grid-columns: 30, 24, 24, 13
 
     // Import Crispy Grid below the configuration
     @import crispy/grid

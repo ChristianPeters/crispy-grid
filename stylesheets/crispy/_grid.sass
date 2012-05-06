@@ -2,17 +2,28 @@
 
 // Grid Configuration Accessors
 //=============================
+$device: false !default
+$devices: false !default
+$grid-column-width: false !default
+$grid-column-widths: false !default
+$grid-gutter-width: false !default
+$grid-gutter-widths: false !default
+$grid-columns: 24 !default
+
 @function default-device()
-  @return nth($devices, 1)
+  @return $device or nth($devices, 1)
 
 @function grid-column-width($device: default-device())
-  @return nth($grid-column-widths, index($devices, $device))
+  @return $grid-column-width or nth($grid-column-widths, index($devices, $device))
 
 @function grid-gutter-width($device: default-device())
-  @return nth($grid-gutter-widths, index($devices, $device))
+  @return $grid-gutter-width or nth($grid-gutter-widths, index($devices, $device))
 
 @function grid-columns($device: default-device())
-  @return nth($grid-columns, index($devices, $device))
+  @if type-of($grid-columns) == list
+    @return nth($grid-columns, index($devices, $device))
+  @else
+    @return $grid-columns
 
 // Note that the gutter is only between the columns, i.e. you have 1 gutter less than columns
 @function grid-gutters($device: default-device())
