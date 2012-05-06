@@ -46,8 +46,7 @@ Pending. Please have a look at the source.
 
     gem 'crispy-grid'
 
-2. In your project configuration file (e.g. initializers/compass.rb)
-   add:
+2. In your project configuration file (e.g. initializers/compass.rb, [you might want to](https://github.com/Compass/compass-rails/blob/stable/README.md#configuration) create one if it does not exist yet) add:
 
     require 'crispy-grid'
 
@@ -86,9 +85,3 @@ Consider to set mobile as default device when following the mobile-first design 
 ## License
 
 See MIT-LICENSE.
-
-## TODO
-
-- Make use of @extend in order to reduce CSS output
-- Return calculation of inner box width for further use as column width
-  of children
