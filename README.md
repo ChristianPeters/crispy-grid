@@ -36,6 +36,52 @@ way.
 
 Crispy tries to support you even if you go beyond the main grid.
 
+## Installation
+
+1. In your Gemfile add:
+
+    gem 'crispy-grid'
+
+2. In your project configuration file (e.g. initializers/compass.rb, [you might want to](https://github.com/Compass/compass-rails/blob/stable/README.md#configuration) create one if it does not exist yet) add:
+
+    require 'crispy-grid'
+
+3. Customize and import the grid in your application stylesheet:
+
+### Configuration for a Single Device
+
+Tell Crispy Grid to use a single device by setting the singular
+configuration options `$device`, `$grid-column-width`, and `grid-gutter-width`.
+
+``` sass
+// Copy this into your app in order to customize the grid
+$device: desktop
+$grid-column-width: 30px
+$grid-gutter-width: 10px
+$grid-columns: 24
+
+// Import Crispy Grid below the configuration
+@import crispy/grid
+```
+
+### Configuration for Multiple Devices
+
+In `$devices` you can list all devices you whish to respond to.
+The nth entry of any of the following lists belongs to the nth device (the order of `$devices` matters).
+The first device is the default for all grid helpers.
+Consider to set mobile as default device when following the mobile-first design approach.
+
+``` sass
+// Copy this into your app in order to customize the grid
+$devices: desktop, tablet, handheld-640, handheld-320
+$grid-column-widths: 30px, 30px, 20px, 20px
+$grid-gutter-widths: 10px, 10px, 5px, 5px
+$grid-columns: 30, 24, 24, 13
+
+// Import Crispy Grid below the configuration
+@import crispy/grid
+```
+
 ## Usage
 
 ### Mixins
@@ -129,52 +175,6 @@ Use might also find these mixins useful:
   * By default, the overflow: hidden method is used. This might get in your way when you have content that wants to 'break out' of your container.
   * Specify `$clearfix: pie` if container contents should be visible outside of the container (e.g. when positioned absolutely).
   * See the used [Compass clearfix lib](http://compass-style.org/reference/compass/utilities/general/clearfix/)
-
-## Installation
-
-1. In your Gemfile add:
-
-    gem 'crispy-grid'
-
-2. In your project configuration file (e.g. initializers/compass.rb, [you might want to](https://github.com/Compass/compass-rails/blob/stable/README.md#configuration) create one if it does not exist yet) add:
-
-    require 'crispy-grid'
-
-3. Customize and import the grid in your application stylesheet:
-
-### Configuration for a Single Device
-
-Tell Crispy Grid to use a single device by setting the singular
-configuration options `$device`, `$grid-column-width`, and `grid-gutter-width`.
-
-``` sass
-// Copy this into your app in order to customize the grid
-$device: desktop
-$grid-column-width: 30px
-$grid-gutter-width: 10px
-$grid-columns: 24
-
-// Import Crispy Grid below the configuration
-@import crispy/grid
-```
-
-### Configuration for Multiple Devices
-
-In `$devices` you can list all devices you whish to respond to.
-The nth entry of any of the following lists belongs to the nth device (the order of `$devices` matters).
-The first device is the default for all grid helpers.
-Consider to set mobile as default device when following the mobile-first design approach.
-
-``` sass
-// Copy this into your app in order to customize the grid
-$devices: desktop, tablet, handheld-640, handheld-320
-$grid-column-widths: 30px, 30px, 20px, 20px
-$grid-gutter-widths: 10px, 10px, 5px, 5px
-$grid-columns: 30, 24, 24, 13
-
-// Import Crispy Grid below the configuration
-@import crispy/grid
-```
 
 ## Changelog
 
