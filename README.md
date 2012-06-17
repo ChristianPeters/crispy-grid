@@ -38,6 +38,26 @@ Crispy tries to support you even if you go beyond the main grid.
 
 ## Usage
 
+### Mixins
+
+The only things you need to know for using Crispy Grid are these 3 mixins:
+
+1. `+grid-container`
+  * Include this in your container element(s) that contain your whole grid.
+2. `+column`
+  * This is the most important mixin. Include e.g. `+column(5)` to span 5 columns, each having a gutter to the right-hand side.
+3. `+last`
+  * Use this to indicate that a column is the last one in a row. It just removes the right gutter.
+
+Use might also find these mixins useful:
+
+1. `+last-column`
+  * This combines `+column` and `+last`. You should favor `+last-column` over these two in order to reduce CSS output.
+2. `+row`
+  * Use this for columns that span the whole row. This mixin just calls `+column` with the configured count of $grid-columns.
+
+### Options
+
 Pending. Please have a look at the source.
 
 ## Installation
