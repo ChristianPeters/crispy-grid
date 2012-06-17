@@ -52,13 +52,83 @@ The only things you need to know for using Crispy Grid are these 3 mixins:
 Use might also find these mixins useful:
 
 1. `+last-column`
-  * This combines `+column` and `+last`. You should favor `+last-column` over these two in order to reduce CSS output.
+  * This combines `+column` and `+last`. You should favor it over the two in order to reduce CSS output.
 2. `+row`
-  * Use this for columns that span the whole row. This mixin just calls `+column` with the configured count of $grid-columns.
+  * Use this for columns that span the whole row. This mixin just calls `+column` with the configured count of `$grid-columns`.
 
 ### Options
 
-Pending. Please have a look at the source.
+#### `+column`, `+last-column`, `+row`
+* `$colspan`
+  * Specifies the number of grid columns the element should span
+  * If the element does not fit into the grid, you can also specify a fixed width.
+  * It is the only mandatory parameter.
+  * Examples: `+column(5)`, `+column(120px)`, `+row($colspan: 23)`
+* `$device`
+  * Relevant if you have [configured multiple devices](#configuration-for-multiple-devices)
+  * Default: `default-device()` - that is the value of `$device` or the first one in `$devices`
+  * The devise must be contained in your `$devices` configuration.
+  * Examples: `+column(3, $device: tablet)`, `+last-column(1, $device: handheld-320)`
+* `$padding`
+  * Now the fun stuff: It is ensured that you do not break the grid by setting padding or a border.
+  * Default: 0
+  * Reduces the resulting `width` attribute of your column
+  * It is applied to both left and right by default.
+  * `padding-top` and `padding-bottom` are out of scope - just set them separately.
+  * Just like $colspan, you can also specify a number of columns.
+  * Examples: `+column(5, $padding: 10px)`, `+column(10, $padding: 1)` - they will have the same overall width as `+column(5)` / `+column(10)`
+* `$differing-right-padding`
+  * Override `$padding` for the right side or exclusively set $padding for the right side
+  * Default: false
+  * Examples: `+column(5, $padding: 10px, $differing-right-padding: 15px)`, `+column(5, $differing-right-padding: 10px)`
+* `$border-width`
+  * Same principle as `$padding`
+* `$differing-right-border-width`
+  * Same principle as `$differing-right-padding`
+* `$gutter`
+  * Customize the gutter (i.e. right margin) of a column
+  * Default: `grid-gutter-width($device)`
+  * Does not affect the "inner gutters"; i.e. if your `grid-gutter-width()` is 10px, `+column(5, $gutter: 15px)` will just add 5px overall whitespace, not 5*5px.
+* `$left-gutter`
+  * Normally, gutters are only right with Crispy Grid. But you might have your reasons.
+  * Default: false
+  * Examples: `+column(5, $gutter: 10px, $left-gutter: 10px)`, `+last-column($left-gutter: 10px)`
+* `$subtract-border-from`
+  * Sometimes you could say `+column(10, $padding: 1)` if there wasn't a 1px border that tries to ruin your grid.
+  * You can use e.g. `+column(10, $padding: 1, $border-width: 1px, $subtract-border-from: padding) instead of `+column(10, $padding: 29px, $border-width: 1px)`.
+  * Default: false
+  * Possible values: padding, left-padding, right-padding, gutter, left-gutter, right-gutter
+  * Example: `+column(10, $border-width: 2px, $subtract-border-from: gutter)`
+
+#### `+grid-container`
+* `$device`
+  * see above
+* `$colspan`
+  * Default: `grid-columns($device)`
+  * see above
+* `$padding: 0`
+  * Unlike with columns, paddings and borders of a container do not affect its inner width.
+  * So the real grid starts with within the container paddings
+  * Example: `+grid-container($colspan: 24, $padding: 30px)` still leaves 24 full columns to its content
+* `$differing-right-padding`
+  * see above
+* `$border-width`
+  * see above
+* `$differing-border-width`
+  * see above
+* `$left-margin`
+  * Normally containers should be horizontally centered on the page.
+  * Default: auto
+  * If you wish to enforce to have whitespace around your container even if the browser window is not bigger than your content, you should do so by setting `$padding`.
+* `$right-margin`
+  * see above
+* `clearfix`
+  * Clearfixing has to be done in order to enforce the container to enclose its content.
+  * Default: overflow
+  * Possible values: `overflow`, `pie`, `pie-clearfix` (same as `pie`)
+  * By default, the overflow: hidden method is used. This might get in your way when you have content that wants to 'break out' of your container.
+  * Specify `$clearfix: pie` if container contents should be visible outside of the container (e.g. when positioned absolutely).
+  * See the used [Compass clearfix lib](http://compass-style.org/reference/compass/utilities/general/clearfix/)
 
 ## Installation
 
