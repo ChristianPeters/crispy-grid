@@ -58,7 +58,7 @@ Use might also find these mixins useful:
 
 ### Options
 
-#### `+column`, `+last-column`, `+row`
+#### Options for `+column`, `+last-column`, `+row`
 * `$colspan`
   * Specifies the number of grid columns the element should span
   * If the element does not fit into the grid, you can also specify a fixed width.
@@ -67,7 +67,7 @@ Use might also find these mixins useful:
 * `$device`
   * Relevant if you have [configured multiple devices](#configuration-for-multiple-devices)
   * Default: `default-device()` - that is the value of `$device` or the first one in `$devices`
-  * The devise must be contained in your `$devices` configuration.
+  * The device must be contained in your `$devices` configuration.
   * Examples: `+column(3, $device: tablet)`, `+last-column(1, $device: handheld-320)`
 * `$padding`
   * Now the fun stuff: It is ensured that you do not break the grid by setting padding or a border.
@@ -75,10 +75,10 @@ Use might also find these mixins useful:
   * Reduces the resulting `width` attribute of your column
   * It is applied to both left and right by default.
   * `padding-top` and `padding-bottom` are out of scope - just set them separately.
-  * Just like $colspan, you can also specify a number of columns.
+  * Just like `$colspan`, you can also specify a number of columns.
   * Examples: `+column(5, $padding: 10px)`, `+column(10, $padding: 1)` - they will have the same overall width as `+column(5)` / `+column(10)`
 * `$differing-right-padding`
-  * Override `$padding` for the right side or exclusively set $padding for the right side
+  * Override `$padding` for the right side or exclusively set `$padding` for the right side
   * Default: false
   * Examples: `+column(5, $padding: 10px, $differing-right-padding: 15px)`, `+column(5, $differing-right-padding: 10px)`
 * `$border-width`
@@ -95,12 +95,12 @@ Use might also find these mixins useful:
   * Examples: `+column(5, $gutter: 10px, $left-gutter: 10px)`, `+last-column($left-gutter: 10px)`
 * `$subtract-border-from`
   * Sometimes you could say `+column(10, $padding: 1)` if there wasn't a 1px border that tries to ruin your grid.
-  * You can use e.g. `+column(10, $padding: 1, $border-width: 1px, $subtract-border-from: padding) instead of `+column(10, $padding: 29px, $border-width: 1px)`.
+  * You can use e.g. `+column(10, $padding: 1, $border-width: 1px, $subtract-border-from: padding)` instead of `+column(10, $padding: 29px, $border-width: 1px)`.
   * Default: false
-  * Possible values: padding, left-padding, right-padding, gutter, left-gutter, right-gutter
+  * Possible values: `padding`, `left-padding`, `right-padding`, `gutter`, `left-gutter`, `right-gutter`
   * Example: `+column(10, $border-width: 2px, $subtract-border-from: gutter)`
 
-#### `+grid-container`
+#### Options for `+grid-container`
 * `$device`
   * see above
 * `$colspan`
