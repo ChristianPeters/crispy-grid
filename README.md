@@ -40,11 +40,13 @@ Crispy tries to support you even if you go beyond the main grid.
 
 1. In your Gemfile add:
 
-    gem 'crispy-grid'
+    ``gem 'crispy-grid'``
 
-2. In your project configuration file (e.g. initializers/compass.rb, [you might want to](https://github.com/Compass/compass-rails/blob/stable/README.md#configuration) create one if it does not exist yet) add:
+2. *Skip this step if you have Rails >= 3 and Compass >= 0.11.*
+ 
+    In your project configuration file (e.g. initializers/compass.rb, [you might want to](https://github.com/Compass/compass-rails/blob/stable/README.md#configuration) create one if it does not exist yet) add:
 
-    require 'crispy-grid'
+    ``require 'crispy-grid'``
 
 3. Customize and import the grid in your application stylesheet:
 
