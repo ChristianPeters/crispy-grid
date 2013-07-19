@@ -86,8 +86,8 @@ $grid-columns: 30, 24, 24, 13
 
 ### Configuration for using border-box
 
-You might be tempted to use the CSS3 Property `box-sizing: border-box` to apply a more natural. Doing so could break crispy grids internal calculations if you have old grid code using a `content-box` layout.
-To tell crispy grid you're using `border-box` initialize it with `$grid-box-sizing` like so
+By default, Crispy Grid mimics this more natural behavior for a box-sizing: content-box setting by doing calculations. If you start a new project and do not have to support IE7, we recommend you to use box-sizing: border-box instead.
+When switching an old project to border-box-sizing you need to tell Crispy Grid so. This is as simple as initializing it with `$grid-box-sizing` like so
 
 ``` sass
 ...
