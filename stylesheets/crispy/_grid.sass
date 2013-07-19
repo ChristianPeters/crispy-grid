@@ -45,9 +45,11 @@ $grid-columns: 24 !default
 // In order to differentiate between left and right padding/border-width you can set $different-right-padding/-border-width.
 // Example: +grid(4, 10px, 15px) will set padding-left: 10px, padding-right: 15px and the element will have the same overall width as +grid(4).
 // By default, the gutter is represented using margin-right, which can also be overridden.
-=column($colspan, $device: default-device(), $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: grid-gutter-width($device), $left-gutter: false, $subtract-border-from: false)
+=column($colspan, $device: default-device(), $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: grid-gutter-width($device), $left-gutter: false, $subtract-border-from: false, $offset: 0)
   +column-behavior
   +column-metrics($colspan, $device, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter, $left-gutter, $subtract-border-from: $subtract-border-from)
+  @if $offset > 0
+    +offset($offset)
 
 // Offset a column by the width of some columns
 =offset($colspan)
@@ -56,8 +58,8 @@ $grid-columns: 24 !default
 
 // The last column should not have a gutter.
 // Respectively, $gutter defaults to 0 in this mixin.
-=last-column($colspan, $device: default-device(), $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: 0, $left-gutter: false, $subtract-border-from: false)
-  +column($colspan, $device, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter, $left-gutter, $subtract-border-from)
+=last-column($colspan, $device: default-device(), $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: 0, $left-gutter: false, $subtract-border-from: false, $offset: 0)
+  +column($colspan, $device, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter, $left-gutter, $subtract-border-from, $offset)
 
 // The only difference between the last and other columns is that the last column has margin-right set to 0.
 =last
