@@ -103,6 +103,8 @@ Use might also find these mixins useful:
   * This combines `+column` and `+last`. You should favor it over the two in order to reduce CSS output.
 2. `+row`
   * Use this for columns that span the whole row. This mixin just calls `+column` with the configured count of `$grid-columns`.
+3. `+offset`
+  * This allows you to offset a column by a given colspan. `+offset(2)` offsets the current column by the width of two columns + gutter width.
 
 ### Options
 
