@@ -49,6 +49,11 @@ $grid-columns: 24 !default
   +column-behavior
   +column-metrics($colspan, $device, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter, $left-gutter, $subtract-border-from: $subtract-border-from)
 
+// Offset a column by the width of some columns
+=offset($colspan)
+  $width: colspan-to-width($colspan)
+  margin-left: $width + grid-gutter-width($device)
+
 // The last column should not have a gutter.
 // Respectively, $gutter defaults to 0 in this mixin.
 =last-column($colspan, $device: default-device(), $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: 0, $left-gutter: false, $subtract-border-from: false)
