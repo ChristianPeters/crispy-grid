@@ -84,6 +84,19 @@ $grid-columns: 30, 24, 24, 13
 @import crispy/grid
 ```
 
+### Configuration for using border-box
+
+By default, Crispy Grid mimics this more natural behavior for a box-sizing: content-box setting by doing calculations. If you start a new project and do not have to support IE7, we recommend you to use box-sizing: border-box instead.
+When switching an old project to border-box-sizing you need to tell Crispy Grid so. This is as simple as initializing it with `$grid-box-sizing` like so
+
+``` sass
+...
+$grid-box-sizing: border-box
+
+// Import Crispy Grid below the configuration
+...
+```
+
 ## Usage
 
 ### Mixins
