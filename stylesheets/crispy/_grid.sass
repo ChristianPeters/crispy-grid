@@ -107,7 +107,6 @@ $grid-box-sizing: content-box !default
     width: $column-width
   @else
     // Paddings and borders do not affect the outer width of a column.
-    // Unless you're using box-sizing: border-box ;)
     @if $grid-box-sizing == 'border-box'
       width: $column-width
     @else
