@@ -97,6 +97,22 @@ $grid-box-sizing: border-box
 ...
 ```
 
+Setting the `$grid-box-sizing` to `border-box` will tell the grid to
+ignore its padding calculations as they are no longer needed when using
+the `border-box` box-model. However this will not apply `border-box` to
+your elements. Most likely you'll want to apply `border-box` to all your
+elements. The way [Paul Irish recommends](http://www.paulirish.com/2012/box-sizing-border-box-ftw/) looks like this when using Compass.
+
+``` sass
+*
+  +box-sizing(border-box)
+```
+
+In most cases this will be the way to go. However, there might be the
+edge cases where you don't want to apply `border-box` to all your
+elements. That's why setting the box-model is not part of Crispy Grid's
+`$grid-box-sizing` option.
+
 ## Usage
 
 ### Mixins
@@ -138,12 +154,16 @@ Use might also find these mixins useful:
   * `padding-top` and `padding-bottom` are out of scope - just set them separately.
   * Just like `$colspan`, you can also specify a number of columns.
   * Examples: `+column(5, $padding: 10px)`, `+column(10, $padding: 1)` - they will have the same overall width as `+column(5)` / `+column(10)`
+  * __Please Note__ when using `$grid-box-sizing` of `border-box`
+    padding calculations will be ignored by Crispy Grid as it isn't
+needed.
 * `$differing-right-padding`
   * Override `$padding` for the right side or exclusively set `$padding` for the right side
   * Default: false
   * Examples: `+column(5, $padding: 10px, $differing-right-padding: 15px)`, `+column(5, $differing-right-padding: 10px)`
 * `$border-width`
   * Same principle as `$padding`
+  * Will also be ignored when `border-box` is used.
 * `$differing-right-border-width`
   * Same principle as `$differing-right-padding`
 * `$gutter`
