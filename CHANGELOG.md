@@ -1,5 +1,9 @@
 # Crispy Grid Changelog
 
+## 0.4.0
+
+* Add support for using `box-sizing` of `border-box` for your grid. This is inevitable when working with fluid grids as padding calculations won't work with percentage and pixel values mixed.
+
 ## 0.3.1
 
 * Altered configuration for a single device due to the change in Sass, that lists have to contain multiple elements
