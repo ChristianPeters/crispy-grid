@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors = ["Christian Peters"]
   s.summary = %q{A Compass-based Grid that strives for lean & sane CSS and supports complex layouts}
   s.description = %q{In short, Crispy Grid closes the gap between easy-to-use grids for simple web pages and doing everything by hand due to layout complexity.}
-  s.email = "info@c-peters.net"
+  s.email = "crispy.dev@gmail.com"
   s.homepage = "https://github.com/ChristianPeters/crispy-grid"
 
   # Gem Files
