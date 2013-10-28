@@ -147,23 +147,20 @@ Use might also find these mixins useful:
   * The device must be contained in your `$devices` configuration.
   * Examples: `+column(3, $device: tablet)`, `+last-column(1, $device: handheld-320)`
 * `$padding`
-  * Now the fun stuff: It is ensured that you do not break the grid by setting padding or a border.
+  * Now the fun stuff: Even when you use the browser default setting `box-sizing: content-box`, it is ensured that you do not break the grid by setting padding or a border.
   * Default: 0
-  * Reduces the resulting `width` attribute of your column
+  * Reduces the resulting `width` attribute of your column (unless you configured `$grid-box-sizing: border-box`)
   * It is applied to both left and right by default.
   * `padding-top` and `padding-bottom` are out of scope - just set them separately.
   * Just like `$colspan`, you can also specify a number of columns.
   * Examples: `+column(5, $padding: 10px)`, `+column(10, $padding: 1)` - they will have the same overall width as `+column(5)` / `+column(10)`
-  * __Please Note__ when using `$grid-box-sizing` of `border-box`
-    padding calculations will be ignored by Crispy Grid as it isn't
-needed.
 * `$differing-right-padding`
   * Override `$padding` for the right side or exclusively set `$padding` for the right side
   * Default: false
   * Examples: `+column(5, $padding: 10px, $differing-right-padding: 15px)`, `+column(5, $differing-right-padding: 10px)`
 * `$border-width`
   * Same principle as `$padding`
-  * Will also be ignored when `border-box` is used.
+  * This just sets the CSS `border-width` property when using `$grid-box-sizing: border-box`. Otherwise, it also effects the `width` property.
 * `$differing-right-border-width`
   * Same principle as `$differing-right-padding`
 * `$gutter`
@@ -175,11 +172,12 @@ needed.
   * Default: false
   * Examples: `+column(5, $gutter: 10px, $left-gutter: 10px)`, `+last-column($left-gutter: 10px)`
 * `$subtract-border-from`
-  * Sometimes you could say `+column(10, $padding: 1)` if there wasn't a 1px border that tries to ruin your grid.
+  * Sometimes you could say `+column(10, $padding: 1)` if there wasn't a 1px border that tries to ruin your grid (because you rely on box-sizing: content-box).
   * You can use e.g. `+column(10, $padding: 1, $border-width: 1px, $subtract-border-from: padding)` instead of `+column(10, $padding: 29px, $border-width: 1px)`.
   * Default: false
   * Possible values: `padding`, `left-padding`, `right-padding`, `gutter`, `left-gutter`, `right-gutter`
   * Example: `+column(10, $border-width: 2px, $subtract-border-from: gutter)`
+  * This option does nothing useful when using `$grid-box-sizing: border-box`.
 
 #### Options for `+grid-container`
 * `$device`
