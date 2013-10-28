@@ -1,14 +1,14 @@
 Gem::Specification.new do |s|
   # Release Specific Information
-  s.version = "0.3.1"
-  s.date = "2012-05-04"
+  s.version = "0.4.0"
+  s.date = "2013-10-28"
 
   # Gem Details
   s.name = "crispy-grid"
-  s.authors = ["Christian Peters"]
+  s.authors = ["Christian Peters", "Lucas Nolte"]
   s.summary = %q{A Compass-based Grid that strives for lean & sane CSS and supports complex layouts}
   s.description = %q{In short, Crispy Grid closes the gap between easy-to-use grids for simple web pages and doing everything by hand due to layout complexity.}
-  s.email = "info@c-peters.net"
+  s.email = "crispy.dev@gmail.com"
   s.homepage = "https://github.com/ChristianPeters/crispy-grid"
 
   # Gem Files

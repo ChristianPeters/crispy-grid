@@ -129,20 +129,14 @@ $grid-box-sizing: content-box !default
   border:
     left-width: $border-width
     right-width: $right-border-width
-  @if $grid-box-sizing == border-box
-    @if $left-gutter
-      margin-left: $left-gutter
-    @if $gutter
-      margin-right: $gutter
-  @else
-    @if type_of($left-gutter) == number
-      margin-left: if(($subtract-border-from == 'gutter' or $subtract-border-from == 'left-gutter') and $left-gutter > 0, $gutter - $border-width, $left-gutter)
-    @else if $left-gutter
-      margin-left: $left-gutter
-    @if type_of($gutter) == number
-      margin-right: if(($subtract-border-from == 'gutter' or $subtract-border-from == 'right-gutter') and $gutter > 0, $gutter - $right-border-width, $gutter)
-    @else if $gutter
-      margin-right: $gutter
+  @if type_of($left-gutter) == number
+    margin-left: if(($subtract-border-from == 'gutter' or $subtract-border-from == 'left-gutter') and $left-gutter > 0, $gutter - $border-width, $left-gutter)
+  @else if $left-gutter
+    margin-left: $left-gutter
+  @if type_of($gutter) == number
+    margin-right: if(($subtract-border-from == 'gutter' or $subtract-border-from == 'right-gutter') and $gutter > 0, $gutter - $right-border-width, $gutter)
+  @else if $gutter
+    margin-right: $gutter
 
 @function colspan-to-width($colspan, $device: default-device(), $include-last-gutter: false)
   @if is-column-count($colspan)
