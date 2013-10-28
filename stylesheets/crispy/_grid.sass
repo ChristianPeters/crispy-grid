@@ -9,6 +9,7 @@ $grid-column-widths: false !default
 $grid-gutter-width: false !default
 $grid-gutter-widths: false !default
 $grid-columns: 24 !default
+$grid-box-sizing: content-box !default
 
 @function default-device()
   @return $device or nth($devices, 1)
@@ -106,7 +107,10 @@ $grid-columns: 24 !default
     width: $column-width
   @else
     // Paddings and borders do not affect the outer width of a column.
-    width: $column-width - $padding-sum - $border-width-sum
+    @if $grid-box-sizing == 'border-box'
+      width: $column-width
+    @else
+      width: $column-width - $padding-sum - $border-width-sum
 
   // Setting other box attributes
   padding:
@@ -115,14 +119,20 @@ $grid-columns: 24 !default
   border:
     left-width: $border-width
     right-width: $right-border-width
-  @if type_of($left-gutter) == number
-    margin-left: if(($subtract-border-from == 'gutter' or $subtract-border-from == 'left-gutter') and $left-gutter > 0, $gutter - $border-width, $left-gutter)
-  @else if $left-gutter
-    margin-left: $left-gutter
-  @if type_of($gutter) == number
-    margin-right: if(($subtract-border-from == 'gutter' or $subtract-border-from == 'right-gutter') and $gutter > 0, $gutter - $right-border-width, $gutter)
-  @else if $gutter
-    margin-right: $gutter
+  @if $grid-box-sizing == border-box
+    @if $left-gutter
+      margin-left: $left-gutter
+    @if $gutter
+      margin-right: $gutter
+  @else
+    @if type_of($left-gutter) == number
+      margin-left: if(($subtract-border-from == 'gutter' or $subtract-border-from == 'left-gutter') and $left-gutter > 0, $gutter - $border-width, $left-gutter)
+    @else if $left-gutter
+      margin-left: $left-gutter
+    @if type_of($gutter) == number
+      margin-right: if(($subtract-border-from == 'gutter' or $subtract-border-from == 'right-gutter') and $gutter > 0, $gutter - $right-border-width, $gutter)
+    @else if $gutter
+      margin-right: $gutter
 
 @function colspan-to-width($colspan, $device: default-device(), $include-last-gutter: false)
   @if is-column-count($colspan)
