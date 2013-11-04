@@ -115,7 +115,7 @@ elements. That's why setting the box-model is not part of Crispy Grid's
 
 ### On Fluid Grids
 Crispy is fully capable of creating percentage based grids. However, when creating a fluid grid `border-box` should be used.
-Nesting columns is tricky with fluid grids. Crispy provides the `nested-column` mixin to help with nested columns.
+Nesting columns is tricky with fluid grids. Crispy provides the `fluid-sub-column` mixin to help with nested columns. (See below)
 
 ## Usage
 
@@ -136,12 +136,13 @@ Use might also find these mixins useful:
   * This combines `+column` and `+last`. You should favor it over the two in order to reduce CSS output.
 2. `+row`
   * Use this for columns that span the whole row. This mixin just calls `+column` with the configured count of `$grid-columns`.
-3. `+nested-column`
-  * This resets the percentage values for nested fluid columns. Just provide the intended colspan and the parent colspan `+nested-column(2, 4)`
+3. `+fluid-sub-column`
+  * This resets the percentage values for nested fluid columns.
+    Just provide the intended colspan and the parent colspan (`+fluid-sub-column(2, 4)`) and Crispy will calculate a width and gutter as if the column was not nested.
 
 ### Options
 
-#### Options for `+column`, `+last-column`, `+row`
+#### Options for `+column`, `+last-column`, `+row`, `+fluid-sub-column`
 * `$colspan`
   * Specifies the number of grid columns the element should span
   * If the element does not fit into the grid, you can also specify a fixed width.

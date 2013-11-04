@@ -50,7 +50,7 @@ $grid-box-sizing: content-box !default
   +column-behavior
   +column-metrics($colspan, $device, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter, $left-gutter, $subtract-border-from: $subtract-border-from)
 
-=nested-column($colspan, $parent-colspan, $device: default-device(), $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: grid-gutter-width($device), $left-gutter: false, $subtract-border-from: false)
+=fluid-sub-column($colspan, $parent-colspan, $device: default-device(), $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: grid-gutter-width($device), $left-gutter: false, $subtract-border-from: false)
   +column-behavior
   +column-metrics($colspan, $device, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter, $left-gutter, $subtract-border-from: $subtract-border-from, $parent-colspan: $parent-colspan)
 
@@ -105,7 +105,7 @@ $grid-box-sizing: content-box !default
   $right-padding: if(($subtract-border-from == 'padding' or $subtract-border-from == 'right-padding') and $padding > 0, $right-padding - $right-border-width, $right-padding)
   $padding-sum: left-and-right-sum($left-padding, $right-padding)
 
-  // Recalculate Column width for nested columns
+  // Recalculate Column width for fluid sub columns
   @if $parent-colspan
     $parent-width: colspan-to-width($parent-colspan, $device)
     $column-width: ($column-width / $parent-width) * 100%
