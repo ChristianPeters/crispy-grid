@@ -50,10 +50,6 @@ $grid-box-sizing: content-box !default
   +column-behavior
   +column-metrics($colspan, $device, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter, $left-gutter, $subtract-border-from: $subtract-border-from)
 
-=fluid-sub-column($colspan, $parent-colspan, $device: default-device(), $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: grid-gutter-width($device), $left-gutter: false, $subtract-border-from: false)
-  +column-behavior
-  +column-metrics($colspan, $device, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter, $left-gutter, $subtract-border-from: $subtract-border-from, $parent-colspan: $parent-colspan)
-
 // The last column should not have a gutter.
 // Respectively, $gutter defaults to 0 in this mixin.
 =last-column($colspan, $device: default-device(), $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: 0, $left-gutter: false, $subtract-border-from: false)
@@ -66,6 +62,13 @@ $grid-box-sizing: content-box !default
 // A row spans the whole grid width, i.e. it is the only column in a row. This is just a more elegant way for writing +last-column($grid-columns).
 =row($device: default-device(), $colspan: grid-columns($device), $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: 0, $left-gutter: false, $subtract-border-from: false)
   +last-column($colspan, $device, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter, $left-gutter, $subtract-border-from)
+
+// Intended for use with percentage values only
+// Recalculates $colspan and $gutter so that it appears as if the percentages of your nested column were relative to its grand-parent.
+// The parameters are the same of =column, except for a second mandatory parameter $parent-colspan.
+=fluid-sub-column($colspan, $parent-colspan, $device: default-device(), $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $gutter: grid-gutter-width($device), $left-gutter: false, $subtract-border-from: false)
+  +column-behavior
+  +column-metrics($colspan, $device, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $gutter, $left-gutter, $subtract-border-from: $subtract-border-from, $parent-colspan: $parent-colspan)
 
 // Use this mixin for your (none-floating) grid container.
 // By default, it spans the whole grid-width and is centered.
