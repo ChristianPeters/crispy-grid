@@ -1,8 +1,14 @@
 # Crispy Grid Changelog
 
+## 0.5.0
+
+* Add support for nested fluid columns. Just provide the intended colspan and the parent colspan (`+fluid-sub-column(2, 4)`) and the percentages are recalculated as if your nested column was relative to its grand-parent.
+  Thanks to @lnolte!
+
 ## 0.4.0
 
 * Add support for using `box-sizing` of `border-box` for your grid. This is inevitable when working with fluid grids as padding calculations won't work with percentage and pixel values mixed.
+  Thanks to @lnolte!
 
 ## 0.3.1
 
