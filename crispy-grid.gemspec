@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.description = %q{In short, Crispy Grid closes the gap between easy-to-use grids for simple web pages and doing everything by hand due to layout complexity.}
   s.email = "crispy.dev@gmail.com"
   s.homepage = "https://github.com/ChristianPeters/crispy-grid"
+  s.license = 'MIT'
 
   # Gem Files
   s.files = %w(README.md MIT-LICENSE)
