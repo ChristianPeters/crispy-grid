@@ -84,6 +84,23 @@ $grid-columns: 30, 24, 24, 13
 @import crispy/grid
 ```
 
+### Clearfix Configuration
+Clearfixing has to be done in order to enforce the container to enclose its content. Crispy Grid uses the [Compass Clearfix Utility](http://compass-style.org/reference/compass/utilities/general/clearfix/) which provides two kinds of clearfixes: Overflow and Pie.
+By default, the overflow: hidden method is used. This might get in your way when you have content that wants to 'break out' of your container.
+Use `pie` if container contents should be visible outside of the container (e.g. when positioned absolutely).
+Crispy allow you to set your preffered clearfix project-wide by using
+the `$grid-default-clearfix` variable. So just add the following to your
+crispy config:
+
+
+``` sass
+$grid-default-clearfix: pie
+```
+
+If you don't provide any value, Crispy will default to the `overflow`
+method. You can also override your specified default for single elements
+by providing `$clearfix` for a `+grid-container` (explained below).
+
 ### Configuration for using border-box
 
 By default, Crispy Grid mimics this more natural behavior for a box-sizing: content-box setting by doing calculations. If you start a new project and do not have to support IE7, we recommend you to use box-sizing: border-box instead.
@@ -210,10 +227,8 @@ Use might also find these mixins useful:
   * see above
 * `clearfix`
   * Clearfixing has to be done in order to enforce the container to enclose its content.
-  * Default: overflow
+  * Default: Value specified for `$grid-default-clearfix`
   * Possible values: `overflow`, `pie`, `pie-clearfix` (same as `pie`)
-  * By default, the overflow: hidden method is used. This might get in your way when you have content that wants to 'break out' of your container.
-  * Specify `$clearfix: pie` if container contents should be visible outside of the container (e.g. when positioned absolutely).
   * See the used [Compass clearfix lib](http://compass-style.org/reference/compass/utilities/general/clearfix/)
 
 ## Changelog
