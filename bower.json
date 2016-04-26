@@ -20,9 +20,9 @@
   "license": "MIT",
   "ignore": [
     "lib",
+    "templates",
     "node_modules",
     "bower_components",
-    "templates",
     "test",
     "tests"
   ]
