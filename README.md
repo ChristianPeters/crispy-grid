@@ -1,5 +1,9 @@
 # Crispy Grid
 
+## Difference to ChristianPeters/crispy-grid
+
+In this version of the gem you will have to ensure the presence of the required Compass mixins yourself.
+
 ## Why should I use it?
 
 In short, Crispy Grid closes the gap between easy-to-use grids for
@@ -13,7 +17,7 @@ higher level concepts using only margins and relative positioning.
 Often, this is in conflict with CSS box semantics.
 In CSS, whitespace surrounding content should be expressed as padding of
 the containing element. Margins should be used for defining whitespace
-among sibling elements. 
+among sibling elements.
 
 A common workaround for paddings and margins within a grid is using inner
 wrapping elements which are save to style. This is unsemantic and
@@ -43,7 +47,7 @@ Crispy tries to support you even if you go beyond the main grid.
     ``gem 'crispy-grid'``
 
 2. *Skip this step if you have Rails >= 3 and Compass >= 0.11.*
- 
+
     In your project configuration file (e.g. initializers/compass.rb, [you might want to](https://github.com/Compass/compass-rails/blob/stable/README.md#configuration) create one if it does not exist yet) add:
 
     ``require 'crispy-grid'``
