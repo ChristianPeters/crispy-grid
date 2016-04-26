@@ -14,7 +14,8 @@ Gem::Specification.new do |s|
 
   # Gem Files
   s.files = %w(README.md MIT-LICENSE)
-  s.files += Dir.glob("stylesheets/**/*.*")
+  s.files += Dir.glob("lib/**/*.*")
+  s.files += Dir.glob("vendor/**/*.*")
   s.files += Dir.glob("templates/**/*.*")
 
   # Gem Dependencies
