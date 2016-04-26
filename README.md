@@ -1,9 +1,5 @@
 # Crispy Grid
 
-## Difference to ChristianPeters/crispy-grid
-
-In this version of the gem you will have to ensure the presence of the required Compass mixins yourself.
-
 ## Why should I use it?
 
 In short, Crispy Grid closes the gap between easy-to-use grids for
