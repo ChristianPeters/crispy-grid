@@ -15,12 +15,11 @@ Gem::Specification.new do |s|
   # Gem Files
   s.files = %w(README.md MIT-LICENSE)
   s.files += Dir.glob("lib/**/*.*")
-  s.files += Dir.glob("stylesheets/**/*.*")
+  s.files += Dir.glob("vendor/**/*.*")
   s.files += Dir.glob("templates/**/*.*")
 
   # Gem Dependencies
   s.rubygems_version = %q{1.3.6}
-  s.add_dependency 'compass', '>= 0.11'
   s.add_dependency 'sass', '>= 3.1.2'
 end
 
