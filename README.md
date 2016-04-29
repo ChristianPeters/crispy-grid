@@ -40,9 +40,13 @@ Crispy tries to support you even if you go beyond the main grid.
 
 1. In your Gemfile add:
 
-    ``gem 'crispy-grid'``
+    source 'https://rails-assets.org' do
+      gem 'rails-assets-ChristianPeters--crispy-grid'
+    end
 
-2. Customize and import the grid in your application stylesheet:
+2. Run ```bundle install```.
+
+3. Customize and import the grid in your application stylesheet:
 
 ### Configuration for a Single Device
 
@@ -57,7 +61,7 @@ $grid-gutter-width: 10px
 $grid-columns: 24
 
 // Import Crispy Grid below the configuration
-@import crispy/grid
+@import crispy-grid/grid
 ```
 
 ### Configuration for Multiple Devices
@@ -75,7 +79,7 @@ $grid-gutter-widths: 10px, 10px, 5px, 5px
 $grid-columns: 30, 24, 24, 13
 
 // Import Crispy Grid below the configuration
-@import crispy/grid
+@import crispy-grid/grid
 ```
 
 ### Configuration for using border-box
