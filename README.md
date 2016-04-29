@@ -206,13 +206,6 @@ Use might also find these mixins useful:
   * If you wish to enforce to have whitespace around your container even if the browser window is not bigger than your content, you should do so by setting `$padding`.
 * `$right-margin`
   * see above
-* `clearfix`
-  * Clearfixing has to be done in order to enforce the container to enclose its content.
-  * Default: overflow
-  * Possible values: `overflow`, `pie`, `pie-clearfix` (same as `pie`)
-  * By default, the overflow: hidden method is used. This might get in your way when you have content that wants to 'break out' of your container.
-  * Specify `$clearfix: pie` if container contents should be visible outside of the container (e.g. when positioned absolutely).
-  * See the used [Compass clearfix lib](http://compass-style.org/reference/compass/utilities/general/clearfix/)
 
 ## Changelog
 
