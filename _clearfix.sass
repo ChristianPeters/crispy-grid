@@ -1,0 +1,65 @@
+// The configuration and the clearfixes are taken from the Compass framework
+
+$legacy-support-for-ie: true !default
+$legacy-support-for-ie6: $legacy-support-for-ie !default
+$legacy-support-for-ie7: $legacy-support-for-ie !default
+$legacy-support-for-ie8: $legacy-support-for-ie !default
+$legacy-support-for-ie: $legacy-support-for-ie6 or $legacy-support-for-ie7 or $legacy-support-for-ie8
+$legacy-support-for-mozilla: true
+
+$experimental-support-for-mozilla      : true !default
+$experimental-support-for-webkit       : true !default
+$support-for-original-webkit-gradients : true !default
+$experimental-support-for-opera        : true !default
+$experimental-support-for-microsoft    : true !default
+$experimental-support-for-khtml        : false !default
+$experimental-support-for-svg          : false !default
+$experimental-support-for-pie          : false !default
+
+$default-has-layout-approach: zoom !default
+
+=has-layout($approach: $default-has-layout-approach)
+  @if $legacy-support-for-ie
+    @if $approach == zoom
+      +has-layout-zoom
+    @else if $approach == block
+      +has-layout-block
+    @else
+      @warn "Unknown has-layout approach: #{$approach}"
+      +has-layout-zoom
+
+=has-layout-zoom
+  @if $legacy-support-for-ie6 or $legacy-support-for-ie7
+    *zoom: 1
+
+=has-layout-block
+  @if $legacy-support-for-ie
+    display: inline-block
+    &
+      display: block
+
+=bang-hack($property, $value, $ie6-value)
+  @if $legacy-support-for-ie6
+    #{$property}: #{$value} !important
+    #{$property}: #{$ie6-value}
+
+=clearfix
+  overflow: hidden
+  +has-layout
+
+=legacy-pie-clearfix
+  &:after
+    content    : "\0020"
+    display    : block
+    height     : 0
+    clear      : both
+    overflow   : hidden
+    visibility : hidden
+  +has-layout
+
+=pie-clearfix
+  &:after
+    content: ""
+    display: table
+    clear: both
+  +has-layout
