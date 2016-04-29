@@ -1,5 +1,9 @@
 # Crispy Grid Changelog
 
+## 0.6.0
+
+* Switch to inclusion via rails-assets instead of providing a ruby gem.
+
 ## 0.5.0
 
 * Add support for nested fluid columns. Just provide the intended colspan and the parent colspan (`+fluid-sub-column(2, 4)`) and the percentages are recalculated as if your nested column was relative to its grand-parent.
