@@ -1,23 +1,19 @@
 PATH
   remote: .
   specs:
-    crispy-grid (0.0.1)
-      compass (>= 0.11)
-      sass (>= 3.1.0)
+    crispy-grid (0.6.0)
+      sass (>= 3.1.2)
 
 GEM
   remote: http://rubygems.org/
   specs:
-    chunky_png (1.2.5)
-    compass (0.11.3)
-      chunky_png (~> 1.2)
-      fssm (>= 0.2.7)
-      sass (~> 3.1)
-    fssm (0.2.7)
-    sass (3.1.10)
+    sass (3.4.21)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   crispy-grid!
+
+BUNDLED WITH
+   1.11.2

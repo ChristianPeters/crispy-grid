@@ -1,4 +1,11 @@
-@import compass//utilities/general/clearfix
+// Helper Methods
+//=============================
+=clearfix
+  &:after
+    content: ""
+    display: table
+    clear: both
+  *zoom: 1
 
 // Grid Configuration Accessors
 //=============================
@@ -74,13 +81,9 @@ $grid-box-sizing: content-box !default
 // By default, it spans the whole grid-width and is centered.
 // Unlike with columns, paddings and borders of a container do not affect its inner width.
 // Clearfixing has to be done in order to enforce the container to enclose its content.
-// By default, the overflow: hidden method is used. Specify $clearfix: pie if container contents should be visible outside of the container (e.g. when positioned absolutely).
-=grid-container($device: default-device(), $colspan: grid-columns($device), $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $left-margin: auto, $right-margin: auto, $clearfix: overflow)
+=grid-container($device: default-device(), $colspan: grid-columns($device), $padding: 0, $differing-right-padding: false, $border-width: 0, $differing-right-border-width: false, $left-margin: auto, $right-margin: auto)
   +column-metrics($colspan, $device, $padding, $differing-right-padding, $border-width, $differing-right-border-width, $right-margin, $left-margin, true)
-  @if $clearfix == pie or $clearfix == pie-clearfix
-    +pie-clearfix
-  @else
-    +clearfix
+  +clearfix
 
 // Internal Methods
 //=================
