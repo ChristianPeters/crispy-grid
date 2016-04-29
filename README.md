@@ -39,11 +39,11 @@ Crispy tries to support you even if you go beyond the main grid.
 ## Installation
 
 1. In your Gemfile add:
-
+```ruby
     source 'https://rails-assets.org' do
         gem 'rails-assets-ChristianPeters--crispy-grid'
     end
-
+```
 2. Run ```bundle install```.
 
 3. Customize and import the grid in your application stylesheet:
