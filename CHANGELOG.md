@@ -1,5 +1,9 @@
 # Crispy Grid Changelog
 
+## 0.7.0
+
+* Switch to bower package structure to allow distribution via rails-assets.org
+
 ## 0.6.0
 
 * Remove the dependency to the Compass framework, which is no longer maintained.
