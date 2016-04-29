@@ -13,7 +13,7 @@ higher level concepts using only margins and relative positioning.
 Often, this is in conflict with CSS box semantics.
 In CSS, whitespace surrounding content should be expressed as padding of
 the containing element. Margins should be used for defining whitespace
-among sibling elements. 
+among sibling elements.
 
 A common workaround for paddings and margins within a grid is using inner
 wrapping elements which are save to style. This is unsemantic and
@@ -39,14 +39,12 @@ Crispy tries to support you even if you go beyond the main grid.
 ## Installation
 
 1. In your Gemfile add:
-
-    ``gem 'crispy-grid'``
-
-2. *Skip this step if you have Rails >= 3 and Compass >= 0.11.*
- 
-    In your project configuration file (e.g. initializers/compass.rb, [you might want to](https://github.com/Compass/compass-rails/blob/stable/README.md#configuration) create one if it does not exist yet) add:
-
-    ``require 'crispy-grid'``
+```ruby
+    source 'https://rails-assets.org' do
+        gem 'rails-assets-ChristianPeters--crispy-grid'
+    end
+```
+2. Run ```bundle install```.
 
 3. Customize and import the grid in your application stylesheet:
 
@@ -63,7 +61,7 @@ $grid-gutter-width: 10px
 $grid-columns: 24
 
 // Import Crispy Grid below the configuration
-@import crispy/grid
+@import crispy-grid/grid
 ```
 
 ### Configuration for Multiple Devices
@@ -81,7 +79,7 @@ $grid-gutter-widths: 10px, 10px, 5px, 5px
 $grid-columns: 30, 24, 24, 13
 
 // Import Crispy Grid below the configuration
-@import crispy/grid
+@import crispy-grid/grid
 ```
 
 ### Configuration for using border-box
@@ -208,13 +206,6 @@ Use might also find these mixins useful:
   * If you wish to enforce to have whitespace around your container even if the browser window is not bigger than your content, you should do so by setting `$padding`.
 * `$right-margin`
   * see above
-* `clearfix`
-  * Clearfixing has to be done in order to enforce the container to enclose its content.
-  * Default: overflow
-  * Possible values: `overflow`, `pie`, `pie-clearfix` (same as `pie`)
-  * By default, the overflow: hidden method is used. This might get in your way when you have content that wants to 'break out' of your container.
-  * Specify `$clearfix: pie` if container contents should be visible outside of the container (e.g. when positioned absolutely).
-  * See the used [Compass clearfix lib](http://compass-style.org/reference/compass/utilities/general/clearfix/)
 
 ## Changelog
 

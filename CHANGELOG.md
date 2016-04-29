@@ -1,5 +1,13 @@
 # Crispy Grid Changelog
 
+## 0.7.0
+
+* Simplify clearfix and remove Compass dependency
+
+## 0.6.0
+
+* Switch to inclusion via rails-assets instead of providing a ruby gem.
+
 ## 0.5.0
 
 * Add support for nested fluid columns. Just provide the intended colspan and the parent colspan (`+fluid-sub-column(2, 4)`) and the percentages are recalculated as if your nested column was relative to its grand-parent.
@@ -41,7 +49,7 @@
 
 ## 0.0.2
 
-* Registrated Crispy Grid as an extension for Compass 
+* Registrated Crispy Grid as an extension for Compass
 * Updated installation instructions so that Rails 2.3, 3.0, and 3.1 are reflected
 * Added row mixin
 * Changed name of $right-margin to $gutter
