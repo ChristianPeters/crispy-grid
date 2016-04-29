@@ -1,0 +1,27 @@
+{
+  "name": "crispy-grid",
+  "version": "0.7.0",
+  "homepage": "https://github.com/ChristianPeters/crispy-grid",
+  "main": [
+    "stylesheets/crispy-grid.sass"
+  ],
+  "authors": [
+    "Christian Peters <crispy.dev@gmail.com>",
+    "Lucas Nolte"
+  ],
+  "description": "A grid that strives for lean & sane CSS and supports complex layouts. In short, Crispy Grid closes the gap between easy-to-use grids for simple web pages and doing everything by hand due to layout complexity.",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "grid",
+    "sass"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
